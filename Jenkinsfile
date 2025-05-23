@@ -1,36 +1,38 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "${env.PATH}:${pwd()}/node_modules/.bin"
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-creds', url: 'https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN.git', branch: 'main'
+                git credentialsId: 'github-creds', url: 'https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
-                sh 'npm install -g truffle'  // ✅ Install Truffle globally
             }
         }
 
         stage('Build') {
             steps {
-                sh 'truffle version'          // ✅ Optional: verify Truffle is available
-                sh 'npm run build'
+                sh 'npx truffle version'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm run test'
+                sh 'npx truffle test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploy stage (not implemented)'
+                sh 'npx truffle migrate --reset'
             }
         }
     }
