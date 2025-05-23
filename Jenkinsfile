@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-creds', url: 'https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN.git'
+                // Checkout from the 'main' branch explicitly
+                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN.git'
             }
         }
 
