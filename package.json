@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN/issues"
   },
-  "homepage": "https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN#readme"
+  "homepage": "https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN#readme",
+  "devDependencies": {
+    "truffle": "^5.11.5"
+  }
 }
