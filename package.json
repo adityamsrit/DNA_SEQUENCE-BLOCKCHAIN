@@ -1,0 +1,29 @@
+{
+  "name": "dna-auth-chain",
+  "version": "1.0.0",
+  "description": "A decentralized application (DApp) that allows users to securely hash DNA sequences using SHA-256 and store these hashes on the Ethereum blockchain. This ensures the integrity and authenticity of DNA data using blockchain technology.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN.git"
+  },
+  "keywords": [
+    "blockchain",
+    "DNA",
+    "Ethereum",
+    "SHA-256",
+    "DApp"
+  ],
+  "author": "Aditya GS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN/issues"
+  },
+  "homepage": "https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN#readme"
+}
