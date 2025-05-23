@@ -2,10 +2,12 @@ pipeline {
     agent any
     stages {
         stage('Checkout') {
-            steps {
-                git url: 'https://github.com/yourusername/your-blockchain-project.git', branch: 'main'
-            }
-        }
+    steps {
+       git url: 'https://github.com/adityamsrit/DNA_SEQUENCE-BLOCKCHAIN.git', branch: 'main'
+
+    }
+}
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
