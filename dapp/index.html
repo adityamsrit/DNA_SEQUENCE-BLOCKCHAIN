@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DNA Hash DApp</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+</head>
+<body>
+  <h2>DNA Hash Storage</h2>
+
+  <button onclick="connectWallet()">🔌 Connect MetaMask</button>
+  <p id="wallet-address"></p>
+
+  <input type="text" id="dnaHashInput" placeholder="Enter DNA hash">
+  <button onclick="storeHash()">Store Hash</button>
+
+  <br><br>
+
+  <button onclick="getHash()">Get My Stored Hash</button>
+  <p id="storedHash"></p>
+
+  <script>
+    let web3;
+    let contract;
+    const contractAddress = "0xb15D9E5ed7963bdc253478B2e82322A70CE70A43";
+
+
+    const abi =[
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "dnaHashes",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_hash",
+          "type": "string"
+        }
+      ],
+      "name": "storeHash",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getHash",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ];
+
+   // Initialize Web3
+window.addEventListener('load', async () => {
+    // Fallback to localhost if no web3 injection
+    web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+
+    // Create contract instance
+    contract = new web3.eth.Contract(abi, contractAddress);
+});
+
+
+async function storeHash() {
+    try {
+        const accounts = await web3.eth.getAccounts();
+        const dnaHash = document.getElementById("dnaHashInput").value;
+
+        if (!dnaHash) {
+            alert("Please enter a DNA hash.");
+            return;
+        }
+
+        await contract.methods.storeHash(dnaHash).send({ from: accounts[0] });
+        alert("Hash stored successfully!");
+    } catch (error) {
+        console.error("Error storing hash:", error);
+        alert("Failed to store hash. Check console for details.");
+    }
+}
+
+async function getHash() {
+    try {
+        const accounts = await web3.eth.getAccounts();
+        const stored = await contract.methods.getHash(accounts[0]).call();
+        document.getElementById("storedHash").innerText = "Stored Hash: " + stored;
+    } catch (error) {
+        console.error("Error retrieving hash:", error);
+        alert("Failed to retrieve hash. Check console for details.");
+    }
+}
+
+  </script>
+</body>
+</html>
